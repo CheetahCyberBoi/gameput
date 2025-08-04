@@ -5,7 +5,6 @@ use directories::ProjectDirs;
 use figment::{Figment, providers::{Format, Env, Toml, Serialized}};
 use log::LevelFilter;
 use serde::{Deserialize, Serialize};
-use serde_with::{NoneAsEmptyString, serde_as};
 
 use crate::cli::Cli;
 

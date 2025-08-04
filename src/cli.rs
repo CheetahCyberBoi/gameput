@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Parser;
 use log::LevelFilter;
-use serde::{Serialize, Deserialize};
+use serde::Serialize;
 
 use crate::config::get_default_config_file;
 
