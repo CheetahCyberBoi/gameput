@@ -1,3 +1,6 @@
+use crate::app::App;
+
+pub mod app;
 pub mod config;
 pub mod cli;
 
@@ -9,5 +12,6 @@ pub fn run() -> anyhow::Result<()>{
     }
     println!("hi there this is a testyh thingiweoruiwo34ioiw3u4owi3u4o");
     println!("config: {:?}", config::get());
-    Ok(())
+    let app = App::new()?;
+    app.run()
 }
