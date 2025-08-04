@@ -1,15 +1,20 @@
 [package]
 name = "gameput"
 description = "A novel method for input via a controller."
-version = "0.1.0"
+version = "0.0.1"
 edition = "2024"
 
 [dependencies]
 anyhow = "1.0.98"
+clap = { version = "4.5", features = ["cargo", "color", "derive", "string", "unicode"] }
+directories = "6.0.0"
 enigo = { version = "0.5.0", features = ["serde", "wayland", "xdo"] }
 fern = "0.7.1"
 figment = { version = "0.10.19", features = ["json", "toml", "env"] }
 gilrs = { version = "0.11.0", features = ["xinput", "serde", "serde-serialize"], default-features = false}
+log = { version = "0.4.27", features = ["serde"] }
 serde = { version = "1.0.219", features = ["derive"] }
+serde_with = "3.14.0"
 tokio = { version = "1.47.1", features = ["full"] }
 tokio-stream = "0.1.17"
+toml = "0.9.4"

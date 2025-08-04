@@ -1,5 +1,5 @@
 use gameput::run;
 
 fn main() {
-    run();
+    run().expect("you FAILED (booo!)");
 }
