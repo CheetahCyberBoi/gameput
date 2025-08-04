@@ -6,9 +6,9 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.98"
-config = { version = "0.15.13", features = ["json", "toml"] }
 enigo = { version = "0.5.0", features = ["serde", "wayland", "xdo"] }
 fern = "0.7.1"
+figment = { version = "0.10.19", features = ["json", "toml", "env"] }
 gilrs = { version = "0.11.0", features = ["xinput", "serde", "serde-serialize"], default-features = false}
 serde = { version = "1.0.219", features = ["derive"] }
 tokio = { version = "1.47.1", features = ["full"] }
