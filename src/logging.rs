@@ -1,6 +1,6 @@
 use std::time::SystemTime;
 
-use anyhow::{Result, Context};
+use anyhow::Result;
 use fern::Dispatch;
 use log::LevelFilter;
 
@@ -14,32 +14,32 @@ pub fn initialize_logging(log_to_stdio: bool) -> Result<()> {
         std::fs::create_dir_all(log_dir.clone())?;
         let log_path = log_dir.join(format!("{}.log", env!("CARGO_PKG_NAME")));
         Dispatch::new()
-        .format(|out, message, record| {
-            out.finish(format_args!(
-                "[{} {} {}] {}",
-                humantime::format_rfc3339_seconds(SystemTime::now()),
-                record.level(),
-                record.target(),
-                message
-            ))
-        })
-        .level(config::get().log_level.unwrap_or(LevelFilter::Info))
-        .chain(fern::log_file(log_path)?)
-        .apply()?;
+            .format(|out, message, record| {
+                out.finish(format_args!(
+                    "[{} {} {}] {}",
+                    humantime::format_rfc3339_seconds(SystemTime::now()),
+                    record.level(),
+                    record.target(),
+                    message
+                ))
+            })
+            .level(config::get().log_level.unwrap_or(LevelFilter::Info))
+            .chain(fern::log_file(log_path)?)
+            .apply()?;
     } else {
         Dispatch::new()
-        .format(|out, message, record| {
-            out.finish(format_args!(
-                "[{} {} {}] {}",
-                humantime::format_rfc3339_seconds(SystemTime::now()),
-                record.level(),
-                record.target(),
-                message
-            ))
-        })
-        .level(config::get().log_level.unwrap_or(LevelFilter::Info))
-        .chain(std::io::stdout())
-        .apply()?;
+            .format(|out, message, record| {
+                out.finish(format_args!(
+                    "[{} {} {}] {}",
+                    humantime::format_rfc3339_seconds(SystemTime::now()),
+                    record.level(),
+                    record.target(),
+                    message
+                ))
+            })
+            .level(config::get().log_level.unwrap_or(LevelFilter::Info))
+            .chain(std::io::stdout())
+            .apply()?;
     }
     Ok(())
 }
