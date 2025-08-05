@@ -23,8 +23,14 @@ pub struct Config {
     /// Directory where configuration is stored.
     pub config_dir: PathBuf,
 
+    /// Directory to record logs to. Initializes usually to $XDG_DATA_HOME/gameput or AppData on windows.
+    pub log_dir: PathBuf,
+
     /// The log level to use. Valid values are: error, warn, info, debug, trace. Default is info.
     pub log_level: Option<LevelFilter>,
+
+
+
 }
 
 impl Default for Config {
@@ -32,7 +38,8 @@ impl Default for Config {
         Self {
             config_file: get_default_config_file(),
             config_dir: get_default_config_dir(),
-            log_level: None,
+            log_level: Some(LevelFilter::Info), // TODO: remove this for release
+            log_dir: get_default_logging_dir(),
         }
     }
 }
@@ -44,12 +51,12 @@ pub fn initialize_config(arguments: &Cli) -> Result<()>{
     println!("wowie we did a config");
     let config_file = arguments.config_file.clone().unwrap_or_else(get_default_config_file);
     let config = Figment::new()
-    .merge(Serialized::defaults(Config::default()))
-    .merge(Toml::string(CONFIG_DEFAULT))
-    .merge(Toml::file(config_file))
-    .merge(Env::prefixed("GAMEPUT_"))
-    .merge(Serialized::defaults(arguments))
-    .extract::<Config>()?;
+        .merge(Serialized::defaults(Config::default()))
+        .merge(Toml::string(CONFIG_DEFAULT))
+        .merge(Toml::file(config_file))
+        .merge(Env::prefixed("GAMEPUT_"))
+        .merge(Serialized::defaults(arguments))
+        .extract::<Config>()?;
     CONFIG.set(config).map_err(|config| anyhow!("failed to existificate configuration {config:?}"))
 }
 
@@ -67,8 +74,16 @@ pub fn get_default_config_dir() -> PathBuf {
     .unwrap_or(PathBuf::from(".").join(".config"))
 }
 
+/// Returns the default directory for logging files. 
+pub fn get_default_logging_dir() -> PathBuf {
+    env::var("GAMEPUT_LOG_HOME")
+    .map(PathBuf::from)
+    .or_else(|_| project_dirs().map(|dirs| dirs.data_dir().to_path_buf()))
+    .unwrap_or(PathBuf::from(".").join("log"))
+}
+
 fn project_dirs() -> Result<ProjectDirs> {
-    ProjectDirs::from("rs", "Goofy Goobers Inc.", "Gameput").context("Failed to locate config directory.")
+    ProjectDirs::from("rs", "goobers", "gameput").context("Failed to locate config directory.")
 }
 
 /// Gets the configuration.

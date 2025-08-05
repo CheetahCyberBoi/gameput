@@ -26,6 +26,11 @@ pub struct Cli {
     #[arg(long, value_name = "LEVEL", alias = "log")]
     pub log_level: Option<LevelFilter>,
 
+    /// Whether the application should print logging to stdio or a logfile. Overrides configuration option. 
+    /// Defaults to false (don't display to stdio)
+    #[arg(short, long, default_value_t = false)]
+    pub log_to_stdio: bool,
+
 }
 
 
@@ -38,3 +43,4 @@ fn get_default_config_path() -> String {
 pub fn parse() -> Cli {
     Cli::parse()
 }
+
