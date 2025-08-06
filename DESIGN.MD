@@ -4,6 +4,7 @@
 
 The overall idea of `gameput` is to offer a method for people to interact with their machines via a controller.
 The main features of `gameput` should be as follows:
+
 - The ability to input various characters and symbols
 - The ability to move the mouse cursor around and interact via the mouse
 - The ability to overlay an "on-screen keyboard" of sorts to help with input.
@@ -15,6 +16,7 @@ in two configuration files: `$XDG_CONFIG_HOME/gameput/layers.toml` and `$XDG_CON
 ## Terminology and Usage
 
 ### Keyboard mode and Mouse mode
+
 There are two main "modes" of `gameput`: mouse mode and keyboard mode.
 
 - **Mouse mode**: Left stick moves the cursor, while left and right trigger control the left and right mouse buttons (configurable, can be swapped to a more console-style layout)
