@@ -10,11 +10,11 @@ better-panic = "0.3.0"
 clap = { version = "4.5", features = ["cargo", "color", "derive", "string", "unicode"] }
 dirs = "6.0.0"
 enigo = { version = "0.5.0", features = ["serde", "wayland", "xdo"] }
-fern = "0.7.1"
 figment = { version = "0.10.19", features = ["json", "toml", "env"] }
 gilrs = { version = "0.11.0", features = ["xinput", "serde", "serde-serialize"], default-features = false}
 humantime = "2.2.0"
 log = { version = "0.4.27", features = ["serde"] }
+pretty_env_logger = "0.5.0"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_with = "3.14.0"
 toml = "0.9.4"
